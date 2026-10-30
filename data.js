@@ -1,0 +1,55 @@
+
+const ST=(()=>{try{return localStorage}catch(e){return null}})();
+let lang=(ST&&ST.getItem("lw-lang"))||"en";
+const T={en:{tag:"Learn. Practice. Master.",home:"Home",courses:"Courses",lab:"Practice Lab",data:"Datasets",about:"About",
+h1:"Learn Excel visually. Practice it for real.",sub:"Animated lessons, a formula simulator and realistic Indian datasets, from beginner to advanced, in Hindi or English.",
+start:"Start Learning",explore:"Explore Courses",why:"Why Learn Excel with Anshu?",
+w1:"Visual first",w1d:"Watch formulas search, match and add up your data, step by step.",
+w2:"Hands-on",w2d:"Type real formulas in a spreadsheet simulator and check your answers.",
+w3:"Bilingual and private",w3d:"Hindi and English. Everything runs in your browser, with no login and no data collected.",
+cT:"Excel Courses: Basic to Advanced",cD:"Ten levels, from the first cell to real-world projects. Tap a level to see its topics.",
+lT:"Practice Lab",aT:"Formula Animations",aD:"Pick a function and press Play to see how Excel processes each row.",
+play:"Play",pick:"Choose value",sT:"Practice Simulator",sD:"Simplified simulator. It supports SUM, AVERAGE, MIN, MAX, COUNT, IF, SUMIF, SUMIFS, COUNTIF, COUNTIFS, VLOOKUP, XLOOKUP, CONCAT, LEFT, RIGHT and LEN. It is not full Excel.",
+task:"Task",hint:"Show hint",check:"Check Answer",reset:"Reset",free:"Free practice",ok:"Correct! ",no:"Not yet. Check your formula and try a hint.",
+ans:"Type your formula in cell B12.",solution:"Solution",noh:"No more hints.",fx:"Formula",
+dT:"Dataset Library",dD:"Realistic sample data with fictional Indian names. Copy the CSV into Excel, or load it into the simulator.",copy:"Copy CSV",copied:"Copied!",cf:"Copy failed. Select the preview and copy manually.",load:"Load in simulator",
+abT:"About the Developer",abD:"Learn Excel with Anshu is an initiative to make Excel education simple, practical and accessible to everyone. It focuses on visual explanations, hands-on practice and bilingual learning in Hindi and English.",
+foot:"Runs fully in your browser. No login. No data collected.",lvl:"Level",
+s_v:"Searching for ID",s_f:"Match found! Taking column 2.",s_t:"Running total",chk:"Checking row",pass:"Pass",fail:"Fail"},
+hi:{tag:"सीखो. अभ्यास करो. महारत पाओ.",home:"होम",courses:"कोर्स",lab:"प्रैक्टिस लैब",data:"डेटासेट",about:"परिचय",
+h1:"Excel को देखकर सीखें, खुद करके समझें।",sub:"एनिमेटेड पाठ, फ़ॉर्मूला सिमुलेटर और भारतीय संदर्भ के डेटासेट। शुरुआत से एडवांस तक, हिंदी या अंग्रेज़ी में।",
+start:"सीखना शुरू करें",explore:"कोर्स देखें",why:"Learn Excel with Anshu क्यों?",
+w1:"पहले विज़ुअल",w1d:"देखें कि फ़ॉर्मूला आपके डेटा में कैसे खोजता, मिलाता और जोड़ता है।",
+w2:"खुद करके सीखें",w2d:"सिमुलेटर में असली फ़ॉर्मूला लिखें और अपना उत्तर जाँचें।",
+w3:"दो भाषाएँ, पूरी प्राइवेसी",w3d:"हिंदी और अंग्रेज़ी। सब कुछ आपके ब्राउज़र में चलता है, लॉगिन नहीं, कोई डेटा इकट्ठा नहीं।",
+cT:"Excel कोर्स: बेसिक से एडवांस",cD:"पहले सेल से लेकर असली प्रोजेक्ट तक दस लेवल। टॉपिक देखने के लिए लेवल दबाएँ।",
+lT:"प्रैक्टिस लैब",aT:"फ़ॉर्मूला एनिमेशन",aD:"कोई फ़ंक्शन चुनें और Play दबाएँ, देखें Excel हर पंक्ति को कैसे प्रोसेस करता है।",
+play:"चलाएँ",pick:"मान चुनें",sT:"प्रैक्टिस सिमुलेटर",sD:"यह सरल सिमुलेटर है। इसमें SUM, AVERAGE, MIN, MAX, COUNT, IF, SUMIF, SUMIFS, COUNTIF, COUNTIFS, VLOOKUP, XLOOKUP, CONCAT, LEFT, RIGHT और LEN चलते हैं। यह पूरा Excel नहीं है।",
+task:"काम",hint:"संकेत दिखाएँ",check:"उत्तर जाँचें",reset:"रीसेट",free:"खुला अभ्यास",ok:"सही! ",no:"अभी नहीं। फ़ॉर्मूला जाँचें और संकेत देखें।",
+ans:"अपना फ़ॉर्मूला सेल B12 में लिखें।",solution:"हल",noh:"और संकेत नहीं हैं।",fx:"फ़ॉर्मूला",
+dT:"डेटासेट लाइब्रेरी",dD:"काल्पनिक भारतीय नामों वाला नमूना डेटा। CSV कॉपी करके Excel में डालें या सिमुलेटर में लोड करें।",copy:"CSV कॉपी करें",copied:"कॉपी हो गया!",cf:"कॉपी नहीं हुआ। प्रीव्यू चुनकर हाथ से कॉपी करें।",load:"सिमुलेटर में लोड करें",
+abT:"डेवलपर के बारे में",abD:"Learn Excel with Anshu एक पहल है जिसका उद्देश्य Excel की शिक्षा को सरल, व्यावहारिक और सबके लिए सुलभ बनाना है। इसमें विज़ुअल व्याख्या, खुद करके अभ्यास और हिंदी-अंग्रेज़ी में सीखने पर ज़ोर है।",
+foot:"पूरी तरह आपके ब्राउज़र में चलता है। कोई लॉगिन नहीं। कोई डेटा इकट्ठा नहीं।",lvl:"लेवल",
+s_v:"ID खोज रहे हैं",s_f:"मिल गया! कॉलम 2 लेते हैं।",s_t:"अब तक का जोड़",chk:"पंक्ति जाँच रहे हैं",pass:"Pass",fail:"Fail"}};
+const t=k=>T[lang][k],L=o=>o[lang];
+const LV=[["Excel Fundamentals","एक्सेल की बुनियाद","Workbook and Worksheet, Cells and References, Data Entry, Formatting, AutoFill, Flash Fill, Find and Replace, Freeze Panes, Sorting, Filtering, Save and Export"],
+["Basic Formulas","बेसिक फ़ॉर्मूले","Operators, Relative/Absolute/Mixed References, SUM, AVERAGE, MIN, MAX, COUNT, COUNTA, PRODUCT, ROUND, TODAY, NOW"],
+["Logical and Conditional","लॉजिकल और कंडीशनल","IF, Nested IF, IFS, AND, OR, NOT, IFERROR, SUMIF, SUMIFS, COUNTIF, COUNTIFS, AVERAGEIF, AVERAGEIFS"],
+["Lookup and Reference","लुकअप और रेफ़रेंस","VLOOKUP, HLOOKUP, XLOOKUP, INDEX, MATCH, INDEX + MATCH, XMATCH, CHOOSE, FILTER, UNIQUE, SORT, SORTBY (exact vs approximate match)"],
+["Text and Date","टेक्स्ट और डेट","LEFT, RIGHT, MID, LEN, TRIM, CLEAN, UPPER, LOWER, PROPER, CONCAT, TEXTJOIN, FIND, SEARCH, SUBSTITUTE, TEXT, DATE, DATEDIF, NETWORKDAYS, EOMONTH"],
+["Data Management","डेटा मैनेजमेंट","Data Validation, Drop-down Lists, Conditional Formatting, Remove Duplicates, Text to Columns, Named Ranges, Tables, Structured References"],
+["PivotTables and Analysis","पिवट टेबल और विश्लेषण","Creating a PivotTable, Rows/Columns/Values, Filters, Grouping Dates, Slicers, PivotCharts, Refresh, Dashboards"],
+["Charts and Visualization","चार्ट और विज़ुअलाइज़ेशन","Column, Bar, Line, Pie, Area, Combo, Scatter, Chart Formatting, Dynamic Charts, Interactive Dashboards"],
+["Advanced Excel","एडवांस्ड एक्सेल","Dynamic Arrays, LET, LAMBDA, Goal Seek, Scenario Manager, Solver, Power Query, Power Pivot, Data Models"],
+["Real-World Projects","असली प्रोजेक्ट","HR Report, Attendance Tracker, Salary Sheet, Monthly Sales Report, Inventory, Student Results, Expense Tracker, Business Dashboard, Data Cleaning, Sales Analysis"]];
+const D=[["ID","Name","Dept","City","Salary","Marks"],[101,"Rahul Verma","HR","Indore",32000,72],[102,"Priya Sharma","Finance","Bhopal",41000,38],[103,"Amit Patel","IT","Indore",55000,85],[104,"Neha Singh","HR","Satna",28000,40],[105,"Rohit Yadav","Sales","Jabalpur",36000,55],[106,"Sneha Joshi","IT","Indore",62000,91],[107,"Vikram Rao","Finance","Indore",47000,33],[108,"Anjali Mishra","HR","Indore",30000,64]];
+const S=[["Product","Region","Month","Units","Amount"],["Laptop","Central","Jan",8,480000],["Phone","Central","Jan",20,300000],["Tablet","West","Jan",12,180000],["Laptop","North","Feb",5,300000],["Phone","West","Feb",15,225000],["Tablet","Central","Feb",9,135000],["Laptop","West","Mar",7,420000],["Phone","North","Mar",18,270000]];
+const E=D.slice(1),sum=a=>a.reduce((x,y)=>x+y,0);
+const EX=[{lv:{en:"Beginner",hi:"शुरुआती"},task:{en:"Find the total salary of all employees.",hi:"सभी कर्मचारियों की कुल सैलरी निकालें।"},exp:sum(E.map(r=>r[4])),sol:"=SUM(E2:E9)",
+hints:[{en:"The salaries are in column E, rows 2 to 9.",hi:"सैलरी कॉलम E में, पंक्ति 2 से 9 तक है।"},{en:"Use SUM with the range E2:E9.",hi:"रेंज E2:E9 के साथ SUM इस्तेमाल करें।"}],ex:{en:"SUM adds every number in the range.",hi:"SUM रेंज की सभी संख्याओं को जोड़ता है।"}},
+{lv:{en:"Intermediate",hi:"मध्यम"},task:{en:"Find the total salary of employees in the HR department.",hi:"HR विभाग के कर्मचारियों की कुल सैलरी निकालें।"},exp:sum(E.filter(r=>r[2]=="HR").map(r=>r[4])),sol:'=SUMIF(C2:C9,"HR",E2:E9)',
+hints:[{en:"You need to add salaries only where Dept is HR.",hi:"सिर्फ़ वहीं सैलरी जोड़नी है जहाँ Dept HR है।"},{en:"SUMIF(criteria_range, criteria, sum_range)",hi:"SUMIF(criteria_range, criteria, sum_range)"}],ex:{en:"SUMIF checks column C for HR and adds the matching salaries from column E.",hi:"SUMIF कॉलम C में HR खोजता है और कॉलम E की मिलती सैलरी जोड़ता है।"}},
+{lv:{en:"Intermediate",hi:"मध्यम"},task:{en:"Count employees who live in Indore and earn more than 40000.",hi:"इंदौर में रहने वाले और 40000 से ज़्यादा कमाने वाले कर्मचारी गिनें।"},exp:E.filter(r=>r[3]=="Indore"&&r[4]>40000).length,sol:'=COUNTIFS(D2:D9,"Indore",E2:E9,">40000")',
+hints:[{en:"Two conditions need COUNTIFS, not COUNTIF.",hi:"दो शर्तों के लिए COUNTIFS चाहिए, COUNTIF नहीं।"},{en:'The second criteria is the text ">40000" with quotes.',hi:'दूसरी शर्त कोट्स में ">40000" है।'}],ex:{en:"COUNTIFS counts rows where all conditions are true at once.",hi:"COUNTIFS उन पंक्तियों को गिनता है जहाँ सभी शर्तें एक साथ सही हों।"}},
+{lv:{en:"Advanced",hi:"एडवांस"},task:{en:"Return the name of the employee whose ID is 106.",hi:"ID 106 वाले कर्मचारी का नाम निकालें।"},exp:"Sneha Joshi",sol:"=VLOOKUP(106,A2:F9,2,FALSE)",
+hints:[{en:"Lookup by ID in the first column of A2:F9.",hi:"A2:F9 के पहले कॉलम में ID से खोजें।"},{en:"Name is column 2. Use FALSE for an exact match.",hi:"नाम कॉलम 2 में है। Exact match के लिए FALSE लगाएँ।"}],ex:{en:"VLOOKUP finds 106 in column A, then returns column 2 of that row. FALSE means exact match.",hi:"VLOOKUP कॉलम A में 106 खोजकर उसी पंक्ति का कॉलम 2 देता है। FALSE यानी exact match।"}}];
