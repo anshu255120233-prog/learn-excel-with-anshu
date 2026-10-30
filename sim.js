@@ -13,3 +13,22 @@ else if(k==="fill"){const col=COLS.indexOf(sel[0]),row=+sel.slice(1),nb=col>0?CO
 for(let r=row+1;r<=end;r++){const s=raw[sel]||"";raw[sel[0]+r]=s[0]==="="?shiftF(s,r-row):s}refresh();status()}});
 document.addEventListener("change",e=>{if(e.target.dataset.s!=="fn")return;const f=e.target.value;e.target.value="";if(!f)return;const s=raw[sel]||"";setRaw(sel,(s[0]==="="?s:"=")+f+"(");const i=cellIn(sel);if(i)i.focus()});
 document.addEventListener("keydown",e=>{const c=e.target.dataset&&e.target.dataset.c;if(!c)return;const dr={Enter:e.shiftKey?-1:1,ArrowDown:1,ArrowUp:-1}[e.key];if(dr===undefined)return;e.preventDefault();const r=+c.slice(1)+dr;if(r<1||r>ROWS)return;const n=cellIn(c[0]+r);if(n)n.focus()});
+/* Formula Explorer: every formula with editable values */
+Object.assign(T.en,{xT:"Formula Explorer (all formulas)",xD:"Pick any formula. Change its values (cells, ranges, numbers, text) in the boxes or in the formula box. The result updates instantly using the data in the grid below, so you can edit that data too.",xP:"Change values:"});
+Object.assign(T.hi,{xT:"फ़ॉर्मूला एक्सप्लोरर (सभी फ़ॉर्मूले)",xD:"कोई भी फ़ॉर्मूला चुनें। उसके मान (सेल, रेंज, संख्या, टेक्स्ट) बॉक्स में या फ़ॉर्मूला बॉक्स में बदलें। नतीजा नीचे की ग्रिड के डेटा से तुरंत बदलता है, और वह डेटा भी आप बदल सकते हैं।",xP:"मान बदलें:"});
+(()=>{const st=document.createElement("style");st.textContent=".xrow{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font:15px ui-monospace,Consolas,monospace;margin:8px 0}.xp{font:inherit;padding:4px 6px;min-height:38px;border:1px solid var(--g);border-radius:8px;background:var(--card);color:var(--tx)}#xf{width:100%;font:15px ui-monospace,Consolas,monospace;padding:8px;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--tx);min-height:44px}";document.head.appendChild(st)})();
+let xn="SUMIF",xt=tok(TD.SUMIF.sol.slice(1));
+const xs=()=>"="+xt.map(k=>k.t==="s"?'"'+k.v+'"':String(k.v)).join("");
+const xPar=()=>"<b>=</b>"+xt.map((k,i)=>["n","s","r"].includes(k.t)?`<input class="xp" data-xi="${i}" value="${esc(k.v)}" size="${Math.max(3,String(k.v).length+1)}" autocapitalize="off" autocomplete="off" spellcheck="false" aria-label="${esc(k.v)}">`:`<span>${esc(k.v)}</span>`).join("");
+const xRes=(f=xs())=>{try{return"= "+fmt(ev(parse(tok(f.slice(1))),[]))}catch(e){return"⚠ "+e.message}};
+const xDesc=()=>{const d=TD[xn];return L({en:d.en,hi:d.hi})+" <code>"+esc(d.fx)+"</code>"};
+function xShow(f){const r=document.getElementById("xr");if(r)r.textContent=xRes(f)}
+function xReload(){xt=tok(TD[xn].sol.slice(1));document.getElementById("xd").innerHTML=xDesc();document.getElementById("xpar").innerHTML=xPar();document.getElementById("xf").value=xs();xShow()}
+function xCard(){const o=LV.map((l,i)=>{const n=l[2].split(", ").filter(x=>TD[x]);return n.length?`<optgroup label="${t("lvl")} ${i+1}: ${L({en:l[0],hi:l[1]})}">${n.map(x=>`<option ${x===xn?"selected":""}>${x}</option>`).join("")}</optgroup>`:""}).join("");
+return`<div class="card"><h2>${t("xT")}</h2><p class="mut">${t("xD")}</p><select data-x="sel" aria-label="${t("xT")}">${o}</select><p id="xd">${xDesc()}</p><p class="mut" style="margin:0">${t("xP")}</p><div class="xrow" id="xpar">${xPar()}</div><label for="xf"><b>${t("fx")}</b></label><input id="xf" autocapitalize="off" autocomplete="off" spellcheck="false" value="${esc(xs())}"><div class="row"><button data-x="reset">${t("reset")}</button></div><div class="msg" id="xr" role="status">${esc(xRes())}</div></div>`}
+const _lab=V.lab;V.lab=()=>{const h=_lab(),m='<div class="card"><h2>'+t("sT");return h.replace(m,xCard()+m)};
+document.addEventListener("change",e=>{if(e.target.dataset.x==="sel"){xn=e.target.value;xReload()}});
+document.addEventListener("click",e=>{if(e.target.dataset&&e.target.dataset.x==="reset")xReload()});
+document.addEventListener("input",e=>{const i=e.target;if(i.classList&&i.classList.contains("xp")){xt[+i.dataset.xi].v=i.value;document.getElementById("xf").value=xs();xShow()}
+else if(i.id==="xf"){const f=i.value[0]==="="?i.value:"="+i.value;try{xt=tok(f.slice(1));document.getElementById("xpar").innerHTML=xPar()}catch(x){}xShow(f)}
+else if(i.dataset&&i.dataset.c||i.id==="fb")xShow()});
